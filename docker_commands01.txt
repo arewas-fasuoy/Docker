@@ -1,0 +1,13 @@
+#Transporting Containers
+sudo docker images
+sudo docker commit mysql-container ubuntu-mysql
+sudo docker save ubuntu-mysql -o ubuntu-mysql.tar
+sudo chmod 666 ubuntu-mysql.tar 
+sudo docker load < ubuntu-mysql.tar
+sudo docker run -it ubuntu-mysql
+#Docker Commands
+sudo docker stop containerName 
+sudo docker container rm containerName
+sudo docker rmi imageName
+sudo docker container prune
+###
