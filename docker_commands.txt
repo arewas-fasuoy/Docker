@@ -1,0 +1,75 @@
+#Installing Docker
+sudo apt update
+sudo apt install docker.io
+
+#Starting Docker
+sudo systemctl start docker
+sudo systemctl enable docker
+docker --version
+sudo systemctl status docker
+
+#Downloading Images
+sudo docker pull ubuntu
+sudo docker images
+
+#Creating Containers
+#MySQL
+sudo docker --name mysql-container -it ubuntu
+exit
+sudo docker start mysql-conatiner
+sudo docker exec -it mysql-container bash
+apt update
+apt install vim -y
+apt install mysql-server -y
+service mysql start 
+mysql
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '#mypassword';
+FLUSH PRIVILEGES;
+\q 
+mysql -u root -p
+exit
+apt install inetutil-ping net-tools -y
+exit
+
+#Apache 
+sudo docker run --name apache-container -it ubuntu
+exit
+sudo docker start apache-container
+sudo docker exec -it apache-container bash
+apt update 
+apt install vim -y
+apt install apache2 -y
+service apache2 start
+apt install php libapache2-mod-php php-cli php-mysql -y
+service apache2 restart
+apt install inetutil-ping net-tools -y
+
+#Estbalishing Connection
+vi /var/www/html/index.php
+
+#Paste the following code in index.php
+<?php
+$servername = "172.17.0.2";
+$database = "mysql";
+$username = "root";
+$password = "#mypassword";
+
+// Create connection
+
+$con = new mySQLi ($servername, $username, $password, $database);
+
+// Check connection
+
+if ($con->connect_error) {
+echo "Connection failed: " . $con->connect_error;
+}
+else {
+echo “Connected successfully”;
+}
+?>
+###
+grep -r 'bind-address' /etc/mysql/
+service mysql restart
+
+
+
